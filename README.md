@@ -1,30 +1,38 @@
+# 📘 Bilgi Güvenliği, Teknik GRC ve ISO 27001 Yönetim Notları
 
-📘 Bölüm 1: Bilgi Güvenliği Politikası, Mekanizma ve Unsurları
-1. Güvenlik Politikası (Security Policy)
-Güvenlik politikası, bir organizasyonda hangi eylemlerin olumlu (uygun), hangilerinin olumsuz (uygunsuz) olduğunu belirleyen resmi bir beyandır.
+Bu depo; Yönetim Bilişim Sistemleri (YBS) perspektifiyle Bilgi Güvenliği Yönetim Sistemleri (BGYS), Teknik GRC (Yönetişim, Risk ve Uyum), Bilgi Sistemleri Denetimi ve Katmanlı Siber Savunma konularında çıkardığım kapsamlı ve teknik çalışma notlarını içermektedir.
 
-Amaç: Kurumsal işleyişe sınırlar ve kurallar getirerek güvenliği belirli bir çerçevede yasal zemine oturtur.
+---
 
-Teori - Uygulama İlişkisi: Teori ile uygulama arasındaki boşluklar, sistemlerde güvenlik açıklarının (vulnerabilities) oluşmasına neden olur.
+## 📂 Bölüm 1: Bilgi Güvenliği Politikası, Mekanizma ve Unsurları
+
+### 📜 Güvenlik Politikası (Security Policy)
+Güvenlik politikası, bir organizasyon çatısı altında hangi eylemlerin olumlu (**uygun**), hangilerinin ise olumsuz (**uygunsuz**) olduğunu kesin hatlarla belirleyen **resmi ve kurumsal bir beyandır**.
+
+* **Amaç:** Kurumsal işleyişe net sınırlar ve bağlayıcı kurallar getirerek, bilgi güvenliği süreçlerini belirli bir çerçevede yasal ve operasyonel zemine oturtur.
+* **Teori - Uygulama İlişkisi:** Güvenlik teorisi (kağıt üzerindeki kurallar) ile operasyonel uygulama (sahadaki gerçeklik) arasındaki boşluklar ve uyumsuzluklar, sistemlerde istismar edilebilir ciddi **güvenlik açıklarının (vulnerabilities)** oluşmasına neden olan temel kaynaktır.
+
+---
 
 ### 🛠️ Güvenlik Mekanizmaları
-Kurumsal politikaların kağıt üzerinde kalmasını önlemek ve operasyonel işleyişi denetlemek adına kullanılan iki temel mekanizma bulunur:
+Kurumsal politikaların yalnızca kağıt üzerinde kalmasını önlemek, işleyişi sürdürülebilir kılmak ve operasyonel süreçleri denetlemek adına iki temel mekanizma grubu işletilir:
 
 ```text
 ⚙️ Güvenlik Mekanizmaları
 │
 ├── 💻 Teknik Mekanizmalar
-│   ├── Kriptografi (Veri Şifreleme & Anahtar Yönetimi)
-│   ├── Erişim Kontrolleri (VPN, Next-Gen Firewall)
-│   ├── Uç Nokta Güvenliği (EDR / Antivirüs / XDR)
-│   └── Dijital Doğrulama (e-İmza & Çok Faktörlü Kimlik Doğrulama)
+│   ├── Kriptografi (Veri Şifreleme & Kriptografik Anahtar Yönetimi)
+│   ├── Erişim Kontrolleri (Güvenli VPN Altyapıları, Next-Gen Firewall - NGFW)
+│   ├── Uç Nokta Güvenliği (EDR / Antivirüs / XDR Ajanları)
+│   └── Dijital Doğrulama (e-İmza Altyapısı & Çok Faktörlü Kimlik Doğrulama - MFA)
 │
-└── 👔 Teknik Olmayan Mekanizmalar (İdari / Fiziksel)
-    ├── Hukuki Altyapı (Gizlilik Sözleşmeleri - NDA, Arka Plan Taramaları)
+└── 👔 Teknik Olmayan Mekanizmalar (İdari ve Fiziksel)
+    ├── Hukuki Altyapı (Gizlilik Sözleşmeleri - NDA, Personel Arka Plan Taramaları)
     ├── Fiziksel Güvenlik (Biyometrik Geçiş Sistemleri, Sunucu Odası Kilitleri)
-    └── Operasyonel Denetim (Fiziksel Çevre Bariyerleri)
-## 🎯 3. Bilgi Güvenliğinin Çekirdek İlkeleri (CIA Triad & Ötesi)
+    └── Operasyonel Denetim (Fiziksel Çevre Bariyerleri ve Güvenlik Noktaları)
 ```
+## 🎯 3. Bilgi Güvenliğinin Çekirdek İlkeleri (CIA Triad & Ötesi)
+
 ### 🔺 CIA Üçlüsü Kurumsal Matrisi
 
 | İlke | Teknik Tanım | Kurumsal Koruma Yöntemleri |
@@ -53,7 +61,7 @@ Set-Content Asil.txt "Bu veri bilgi güvenliği bütünlük testine tabi tutulmu
 Get-FileHash Asil.txt -Algorithm MD5
 [!TIP]
 Siber Denetim Notu: Dosya içerisindeki tek bir bit veya noktalama işareti dahi değişse, üretilen yeni Hash değeri tamamen farklı olacaktır (Avalanche Effect). Denetim süreçlerinde bütünlük bu matematiksel kesinlikle doğrulanır.
-
+```
 👥 Genişletilmiş Güvenlik ve Erişim Yaklaşımları
 Sorumlu Tutulabilirlik (Accountability): Sistemdeki her aktivitenin (Log ve Audit Trail mekanizmalarıyla) inkar edilemez şekilde belirli bir kullanıcı kimliğiyle eşleştirilmesi.
 
@@ -70,9 +78,13 @@ Görevler Ayrılığı (Segregation of Duties): Kritik finansal veya sistemsel o
 🏢 4. Kurumsal Yönetim Standartları ve ISO 27001:2022
 🔍 Entegre Yönetim Sistemleri ve Denetim Fazları
 Kurumlar küresel pazarda güvenilirlik kazanmak adına
+
 ISO 9001 (Kalite),
+
 ISO 14001 (Çevre),
+
 ISO 45001 (İSG) ve
+
 ISO 27001 (Bilgi Güvenliği) standartlarını entegre olarak işletirler.
 
  Bu yapılar 3 farklı fazda denetlenir:
@@ -85,7 +97,7 @@ ISO 27001 (Bilgi Güvenliği) standartlarını entegre olarak işletirler.
 
 📊 ISO 27001:2022 Ek-A Kontrol Yapısı
 Yeni güncelleme ile modern siber mimariye uyarlanan standart, kontrolleri 93 Maddeye indirmiş ve 4 ana başlıkta kategorize etmiştir:
-
+````
 ┌────────────────────────────────────────────────────────────────────────┐
 │                        ISO 27001:2022 KONTROLLERİ                      │
 ├───────────────────┬───────────────────┬────────────────┬───────────────┤
@@ -93,6 +105,7 @@ Yeni güncelleme ile modern siber mimariye uyarlanan standart, kontrolleri 93 Ma
 │   Controls        │    Controls       │    Controls    │   Controls    │
 │  (Politika/Rol)   │ (Ağ/Şifreleme/EDR)│  (Veri Merkezi)│ (NDA/Eğitim)  │
 └───────────────────┴───────────────────┴────────────────┴───────────────┘
+````
 🔄 Sürekli İyileştirme Döngüsü (PUKÖ)
 BGYS süreçleri statik değil, dinamiktir; sürekli olarak Planla - Uygula - Kontrol Et - Önlem Al döngüsü işletilir. Denetimlerde çıkan eksiklikler iki tür bulguyla raporlanır:
 
@@ -102,7 +115,7 @@ Minör (Küçük) Uygunsuzluk: Sistemin genel olarak çalıştığı ancak opera
 
 🛡️ 5. Katmanlı Siber Savunma (Defense in Depth)
 Siber güvenlik mimarisinde tek bir güvenlik duvarına veya antivirüs yazılımına güvenilmez. Saldırganların işini zorlaştırmak ve riskleri dağıtmak adına iç içe geçmiş güvenlik katmanları inşa edilir:
-
+````
 🌐 [ İNTERNET ]
        │
        ▼
@@ -120,7 +133,7 @@ Siber güvenlik mimarisinde tek bir güvenlik duvarına veya antivirüs yazılı
        ▼
 🗄️ [ VERİ GÜVENLİĞİ ÇEKİRDEĞİ ] ─────► Veri Kaybı Önleme (DLP), Güçlü Şifreleme
 Zafiyet Odak Noktaları: Paket sızmaları, açık portlar, güncellenmemiş arka plan servisleri (daemon), zayıf kriptografik algoritmalar, içeriden gelen tehditler (Insider Threat) ve web uygulamalarındaki mantıksal kod hataları.
-
+````
 🗺️ 6. Küresel GRC & Siber Güvenlik Hedef Haritası
 Teknik GRC, BT Yönetişimi ve Sızma Testi alanlarındaki uzmanlaşma yolculuğumda uzun vadede hedeflediğim küresel saygınlığa sahip sertifikasyonlar:
 

@@ -1,5 +1,3 @@
-📑 Bilgi Güvenliği ve Teknik GRC Temelleri Çalışma Notları
-Bu döküman; bilgi güvenliği politikalarından teknik kontrol mekanizmalarına, ISO 27001:2022 standartlarından kurumsal denetim süreçlerine kadar uzanan temel ve ileri düzey siber güvenlik konseptlerini içermektedir.
 
 📘 Bölüm 1: Bilgi Güvenliği Politikası, Mekanizma ve Unsurları
 1. Güvenlik Politikası (Security Policy)
@@ -9,133 +7,128 @@ Amaç: Kurumsal işleyişe sınırlar ve kurallar getirerek güvenliği belirli 
 
 Teori - Uygulama İlişkisi: Teori ile uygulama arasındaki boşluklar, sistemlerde güvenlik açıklarının (vulnerabilities) oluşmasına neden olur.
 
-2. Güvenlik Mekanizmaları
-Politikaların kağıt üzerinde kalmaması ve zorunlu tutulması için kullanılan araç, yöntem ve izleme süreçleridir. İki ana gruba ayrılır:
+### 🛠️ Güvenlik Mekanizmaları
+Kurumsal politikaların kağıt üzerinde kalmasını önlemek ve operasyonel işleyişi denetlemek adına kullanılan iki temel mekanizma bulunur:
 
-A. Teknik Mekanizmalar:
+```text
+⚙️ Güvenlik Mekanizmaları
+│
+├── 💻 Teknik Mekanizmalar
+│   ├── Kriptografi (Veri Şifreleme & Anahtar Yönetimi)
+│   ├── Erişim Kontrolleri (VPN, Next-Gen Firewall)
+│   ├── Uç Nokta Güvenliği (EDR / Antivirüs / XDR)
+│   └── Dijital Doğrulama (e-İmza & Çok Faktörlü Kimlik Doğrulama)
+│
+└── 👔 Teknik Olmayan Mekanizmalar (İdari / Fiziksel)
+    ├── Hukuki Altyapı (Gizlilik Sözleşmeleri - NDA, Arka Plan Taramaları)
+    ├── Fiziksel Güvenlik (Biyometrik Geçiş Sistemleri, Sunucu Odası Kilitleri)
+    └── Operasyonel Denetim (Fiziksel Çevre Bariyerleri)
+## 🎯 3. Bilgi Güvenliğinin Çekirdek İlkeleri (CIA Triad & Ötesi)
+```
+### 🔺 CIA Üçlüsü Kurumsal Matrisi
 
-Kriptografi: Verilerin şifrelenmesi ve anahtar yönetimi.
+| İlke | Teknik Tanım | Kurumsal Koruma Yöntemleri |
+| :--- | :--- | :--- |
+| **Gizlilik** *(Confidentiality)* | Bilginin yetkisiz kişilerin, süreçlerin veya sistemlerin eline geçmesinin kesin olarak engellenmesidir. | • Rol Tabanlı Erişim Kontrolleri (RBAC)<br>• Güçlü Şifreleme Algoritmaları (AES-256) |
+| **Bütünlük** *(Integrity)* | Bilginin yetkisiz veya kazaen değiştirilmesinin, silinmesinin ya da bozulmasının önlenmesidir. | • Kriptografik Özet (Hash) Fonksiyonları<br>• Değişiklik Takip Sistemleri (Audit Logs) |
+| **Erişilebilirlik** *(Availability)* | Yetkilendirilmiş kullanıcıların ihtiyaç duyduğu her an veriye ve sistemlere kesintisiz ulaşabilmesidir. | • Yedekleme Stratejileri (3-2-1 Kuralı)<br>• DDoS Koruma Sistemleri ve Yedekli Mimari |
 
-Erişim Kontrolleri: Sanal Özel Ağlar (VPN), Güvenlik Duvarları (Firewall).
+---
 
-Zararlı Yazılım Koruması: Virüs koruma (Antivirüs/EDR) yazılımları.
+### 💻 Teknik Laboratuvar: PowerShell ile Veri Bütünlüğü Doğrulaması
 
-Dijital İmza (e-İmza): Kimlik ve bütünlük doğrulama araçları.
+Kritik sistem konfigürasyonlarının veya log dosyalarının bütünlüğünü (Integrity) denetlemek amacıyla uygulanan pratik hash doğrulama adımları:
 
-B. Teknik Olmayan (Yönetimsel/Fiziksel) Mekanizmalar:
+```powershell
+# 1. Terminal üzerinde Masaüstü dizinine geçiş yapılır
+cd Desktop
 
-Dokümantasyon ve Sözleşmeler: İşe alım süreçlerinde imzalatan gizlilik sözleşmeleri (NDA) ve arka plan kontrolleri.
-
-Fiziksel Güvenlik: Sunucu odalarının kilitleri, biyometrik geçiş sistemleri ve fiziksel bariyerler.
-
-🎯 Bölüm 2: Bilgi Güvenliği İlkeleri (CIA Triad ve Diğer Unsurlar)
-1. Temel Üçlü (CIA Triad)
-Bilgi varlıklarının güvenliğini sağlamanın temelini oluşturan üç ana unsur:
-
-Gizlilik (Confidentiality): Bilginin yetkisiz kişilerin eline geçmesinin engellenmesidir. (Örn: Veri tabanı şifrelemesi, yetkilendirme).
-
-Bütünlük (Integrity): Bilginin yetkisiz veya yetkili kişilerce izinsiz/hatalı olarak değiştirilmesinin önlenmesidir.
-
-Erişilebilirlik (Availability): Bilginin yetkili kullanıcılar tarafından ihtiyaç duyulduğu her an ulaşılabilir olmasıdır. (Örn: Yedekleme sistemleri, DDoS koruması).
-
-💻 Teknik Laboratuvar: PowerShell ile Veri Bütünlüğü Doğrulaması
-Sistemlerdeki verilerin veya konfigürasyon dosyalarının Bütünlük (Integrity) ilkesini koruyup korumadığını kontrol etmek için kriptografik özet (Hash) algoritmaları kullanılır.
-
-Senaryo Uygulaması:
-
-Yeni Dosya Oluşturma: cd Desktop ile masaüstüne geçilir ve yeni bir metin belgesi oluşturulur:
-
-PowerShell
+# 2. Üzerinde test gerçekleştirilecek 'Asil.txt' dosyası oluşturulur
 New-Item Asil.txt
-Dosya İçeriğini Doldurma: Dosyanın içerisine orijinal veri yazılır:
 
-PowerShell
-Set-Content Asil.txt "Dosyanın İçeriği"
-Orijinal Hash Değerini Alma: MD5 algoritması kullanılarak dosyanın benzersiz hash değeri üretilir:
+# 3. Dosya içerisine orijinal kurumsal veri enjekte edilir
+Set-Content Asil.txt "Bu veri bilgi güvenliği bütünlük testine tabi tutulmuştur."
 
-PowerShell
+# 4. Dosyanın MD5 algoritması ile benzersiz hash değeri (parmak izi) hesaplanır
 Get-FileHash Asil.txt -Algorithm MD5
-Bütünlük Kontrolü: Dosya içeriğinde küçük bir değişiklik (Data Alteration) yapıldığında veya dışarıdan bir saldırgan dosyaya müdahale ettiğinde hash değeri tamamen değişir. Sistem bu iki değeri kıyaslayarak bütünlüğün bozulduğunu tespit ve kontrol eder.
+[!TIP]
+Siber Denetim Notu: Dosya içerisindeki tek bir bit veya noktalama işareti dahi değişse, üretilen yeni Hash değeri tamamen farklı olacaktır (Avalanche Effect). Denetim süreçlerinde bütünlük bu matematiksel kesinlikle doğrulanır.
 
-2. Diğer Bilgi Güvenliği Unsurları
-Sorumlu Tutulabilirlik (Accountability): Sistemde kimin, ne zaman, hangi işlemi yaptığının (Log/Kayıt mekanizmaları ile) inkar edilemez şekilde tutulmasıdır.
+👥 Genişletilmiş Güvenlik ve Erişim Yaklaşımları
+Sorumlu Tutulabilirlik (Accountability): Sistemdeki her aktivitenin (Log ve Audit Trail mekanizmalarıyla) inkar edilemez şekilde belirli bir kullanıcı kimliğiyle eşleştirilmesi.
 
-Kimlik Doğrulama (Authentication): Sisteme girmeye çalışan kişinin iddia ettiği kişi olduğunun kanıtlanmasıdır (Parola, MFA, Biyometri).
+Kimlik Doğrulama (Authentication): Erişim talebinde bulunan kişinin gerçekte o kişi olduğunun kanıtlanması (MFA, Parola Politikaları, Biyometri).
 
-Mahremiyet (Privacy): Kişilerin kendilerine ait verilerin kontrolünü, nerede ve nasıl saklandığını bilme ve koruma hakkıdır.
+Mahremiyet (Privacy): Kişisel verilerin (KVKK / GDPR) kontrolünün bireyde olması. Sektörel risk analizlerinde personellerin e-posta ihlalleri Have I Been Pwned gibi istihbarat ağları üzerinden simüle edilir.
 
-Güvenlik Notu: Kişisel verilerinizin sızdırılıp sızdırılmadığını kontrol etmek için kurumsal süreçlerde Have I Been Pwned gibi global veri ihlali istihbarat servisleri simüle edilebilir.
+Bilmesi Gereken İlkesi (Need-to-Know): Personelin yalnızca iş tanımı gereği kesinlikle görmesi gereken kritik verilere erişebilmesi.
 
-3. Bilgi Güvenliğinde Kritik Erişim Yaklaşımları
-Bilmesi Gereken İlkesi (Need-to-Know): Bir personelin sadece görevi gereği bilmesi gereken verilere erişebilmesi, fazlasını görememesidir.
+En Az Haklar İlkesi (Least Privilege): Kullanıcılara sistem üzerinde sadece görevlerini tamamlamalarına yetecek en minimum yetki seviyesinin tanımlanması.
 
-En Az Haklar İlkesi (Least Privilege): Kullanıcılara işlerini yapabilmeleri için ihtiyaç duydukları en minimum yetkilerin tanımlanmasıdır.
+Görevler Ayrılığı (Segregation of Duties): Kritik finansal veya sistemsel operasyonların tek bir kişinin inisiyatifine bırakılmaması, sürecin farklı onay mekanizmalarına bölünmesi.
 
-Görevler Ayrılığı (Segregation of Duties): Kritik bir sürecin (Örn: Finansal onay veya sunucu silme) tek bir kişinin inisiyatifine bırakılmaması, sürecin farklı rollere bölünmesidir.
+🏢 4. Kurumsal Yönetim Standartları ve ISO 27001:2022
+🔍 Entegre Yönetim Sistemleri ve Denetim Fazları
+Kurumlar küresel pazarda güvenilirlik kazanmak adına
+ISO 9001 (Kalite),
+ISO 14001 (Çevre),
+ISO 45001 (İSG) ve
+ISO 27001 (Bilgi Güvenliği) standartlarını entegre olarak işletirler.
 
-🏢 Bölüm 3: Kurumsal Bilgi Güvenliği ve ISO Standartları
-1. Kurumsal Yönetim Sistemleri Standartları
-Şirketlerin küresel pazarda güvenilirlik kazanmak için uyum sağladığı temel standart aileleri:
+ Bu yapılar 3 farklı fazda denetlenir:
 
-ISO 9001: Kalite Yönetim Sistemi
+1. Taraf Denetim (İç Denetim): Kurumun kendi iç denetçileri tarafından sistemin sağlığını ölçmek için yapılan öz değerlendirme döngüsüdür.
 
-ISO 14001: Çevre Yönetim Sistemi
+2. Taraf Denetim: Kurumun, kritik ekosistemini korumak adına mal/hizmet aldığı tedarikçilerini denetlemesidir.
 
-ISO 45001: İş Sağlığı ve Güvenliği Yönetim Sistemi
+3. Taraf Denetim: Bağımsız, akredite dış belgelendirme kuruluşları (Örn: TSE) tarafından yapılan resmi sertifikasyon denetimidir.
 
-ISO 27001 / 27002: Bilgi Güvenliği Yönetim Sistemi (BGYS) ve Güvenlik Kontrolleri
+📊 ISO 27001:2022 Ek-A Kontrol Yapısı
+Yeni güncelleme ile modern siber mimariye uyarlanan standart, kontrolleri 93 Maddeye indirmiş ve 4 ana başlıkta kategorize etmiştir:
 
-2. Denetim Türleri (Audit Types)
-Şirketlerin sistemlerini denetleme ve belgelendirme süreçleri üç aşamada incelenir:
+┌────────────────────────────────────────────────────────────────────────┐
+│                        ISO 27001:2022 KONTROLLERİ                      │
+├───────────────────┬───────────────────┬────────────────┬───────────────┤
+│    Örgütsel       │    Teknolojik     │    Fiziksel    │    İnsani     │
+│   Controls        │    Controls       │    Controls    │   Controls    │
+│  (Politika/Rol)   │ (Ağ/Şifreleme/EDR)│  (Veri Merkezi)│ (NDA/Eğitim)  │
+└───────────────────┴───────────────────┴────────────────┴───────────────┘
+🔄 Sürekli İyileştirme Döngüsü (PUKÖ)
+BGYS süreçleri statik değil, dinamiktir; sürekli olarak Planla - Uygula - Kontrol Et - Önlem Al döngüsü işletilir. Denetimlerde çıkan eksiklikler iki tür bulguyla raporlanır:
 
-1. Taraf Denetim (İç Denetim): Şirketin kendi iç denetçileri tarafından yapılan öz değerlendirme sürecidir.
+Majör (Büyük) Uygunsuzluk: Standardın bir maddesinin veya kontrolünün tamamen yok sayılması/çökmesi (Sertifika alımına doğrudan engeldir).
 
-2. Taraf Denetim: Şirketin mal aldığı tedarikçileri veya iş ortaklarını denetlemesidir.
+Minör (Küçük) Uygunsuzluk: Sistemin genel olarak çalıştığı ancak operasyonel bazda düzeltilmesi gereken küçük iyileştirme alanları.
 
-3. Taraf Denetim (Belgelendirme): Bağımsız, akredite dış kurumlar tarafından yapılan resmi sertifikasyon denetimidir.
+🛡️ 5. Katmanlı Siber Savunma (Defense in Depth)
+Siber güvenlik mimarisinde tek bir güvenlik duvarına veya antivirüs yazılımına güvenilmez. Saldırganların işini zorlaştırmak ve riskleri dağıtmak adına iç içe geçmiş güvenlik katmanları inşa edilir:
 
-3. ISO 27001:2022 Güncellemesi ve Ek-A Kontrolleri
-ISO 27001 standardının 2005 ve 2013 versiyonlarındaki kontrol maddeleri, modern siber tehditler göz önüne alınarak ISO 27001:2022 versiyonunda 93 Kontrol Maddesine düşürülmüş ve 4 ana başlık altında kategorize edilmiştir:
+🌐 [ İNTERNET ]
+       │
+       ▼
+🔒 [ AĞ TRAFİĞİ GÜVENLİĞİ ] ─────────► Firewall, IDS / IPS Sistemleri
+       │
+       ▼
+🌐 [ ÇEVRE VE DMZ GÜVENLİĞİ ] ───────► İzole Sunucu Blokları (DMZ Deployment)
+       │
+       ▼
+🖥️ [ SUNUCU & UYGULAMA GÜVENLİĞİ ] ──► Web Uygulaması Güvenlik Duvarı (WAF), Yama Yönetimi
+       │
+       ▼
+💻 [ SON KULLANICI GÜVENLİĞİ ] ──────► EDR, XDR, Antivirüs Ajanları
+       │
+       ▼
+🗄️ [ VERİ GÜVENLİĞİ ÇEKİRDEĞİ ] ─────► Veri Kaybı Önleme (DLP), Güçlü Şifreleme
+Zafiyet Odak Noktaları: Paket sızmaları, açık portlar, güncellenmemiş arka plan servisleri (daemon), zayıf kriptografik algoritmalar, içeriden gelen tehditler (Insider Threat) ve web uygulamalarındaki mantıksal kod hataları.
 
-Örgütsel Kontroller (Organizational)
+🗺️ 6. Küresel GRC & Siber Güvenlik Hedef Haritası
+Teknik GRC, BT Yönetişimi ve Sızma Testi alanlarındaki uzmanlaşma yolculuğumda uzun vadede hedeflediğim küresel saygınlığa sahip sertifikasyonlar:
 
-Teknolojik Kontroller (Technological)
+CISA (Certified Information Systems Auditor - ISACA): Bilgi sistemleri denetimi ve BT kontrol süreçlerinde küresel altın standart uzmanlık sertifikası.
 
-Fiziksel Kontroller (Physical)
+CISSP (Certified Information Systems Security Professional - ISC²): İleri düzey siber güvenlik mimarisi, tasarımı ve kurumsal yönetişimi tescilleyen tepe yöneticilik belgesi.
 
-İnsani Kontroller (People)
+CEH (Certified Ethical Hacker - EC-Council): Savunma hatlarını güçlendirmek amacıyla siber saldırganların teknik ve metodolojilerini (Beyaz/Siyah/Gri Şapka konseptleri) anlamayı sağlayan uygulamalı sertifika.
 
-4. Sürekli İyileştirme (PUKÖ Döngüsü)
-BGYS'nin sürdürülebilirliği PUKÖ (Planla - Uygula - Kontrol Et - Önlem Al) döngüsüne dayanır. Denetimler esnasında tespit edilen eksiklikler sistemde iki tür bulgu olarak kayda geçer:
+TSE Sızma Testi Uzmanı: Ulusal mevzuat, yerel sızma testi standartları ve kurumsal uyum süreçlerinde aranan en prestijli yerel otorite sertifikasyonu.
 
-Majör (Büyük) Uygunsuzluk: Sistemin temel bir maddesinin tamamen çökmesi veya uygulanmamasıdır. (Sertifika alımına engeldir).
-
-Minör (Küçük) Uygunsuzluk: Sistemin işlediği ancak küçük operasyonel eksikliklerin bulunduğu durumlardır. (İyileştirme planı ile kapatılır).
-
-🔒 Bölüm 4: Katmanlı Siber Savunma ve Profesyonel Sertifikalar
-1. Güvenlik Kademeleri (Katmanlı Savunma / Defense in Depth)
-Bir kurumu korurken tek bir güvenlik aracına güvenilmez. Saldırganın işini zorlaştırmak için iç içe geçmiş güvenlik katmanları (soğan modeli) kurulur:
-
-[ İnternet ] 
-     ↓
-[ Ağ Trafiği Güvenliği (Firewall / IDS / IPS) ]
-     ↓
-[ Kurumsal Çevre Güvenliği / DMZ ]
-     ↓
-[ Sunucu / Uygulama Güvenliği (WAF) ]
-     ↓
-[ Son Kullanıcı / Cihaz Güvenliği (EDR / Antivirüs) ]
-     ↓
-[ Veri Kaybı Önleme (DLP - Data Loss Prevention) ] -> En İçteki Veri Çekirdeği
-Zafiyet Kaynakları: Paket sızmaları, port açıklıkları, servis/daemon açıkları, zayıf şifreleme algoritmaları ve web uygulamalarındaki mantıksal hatalar.
-
-2. Siber Güvenlik ve GRC Alanındaki Profesyonel Sertifikalar
-Kariyer yolculuğunda hedeflenebilecek ulusal ve uluslararası saygın sertifikasyonlar:
-
-CISA (Certified Information Systems Auditor): ISACA tarafından verilen, IT ve Bilgi Sistemleri denetçiliğinin küresel standart sertifikasıdır.
-
-CISSP (Certified Information Systems Security Professional): ISC² tarafından sağlanan, ileri düzey tecrübeli siber güvenlik yöneticilerini hedefleyen tepe sertifikadır.
-
-CEH (Certified Ethical Hacker): EC-Council tarafından verilen, saldırgan gözüyle savunma yapmayı öğreten beyaz şapkalı hacker sertifikasıdır (Beyaz/Siyah/Gri Şapka konseptleri).
-
-TSE Sızma Testi Uzmanı: Türkiye genelinde geçerliliği olan, sızma testi ve yerel uyum süreçlerinde aranan ulusal sertifikadır.
